@@ -1,0 +1,23 @@
+console: true
+org: edsonbruno415
+app: aws-api
+service: aws-api
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+
+functions:
+  api:
+    handler: index.handler
+    events:
+      - httpApi:
+          path: /
+          method: get
+  api-2:
+    handler: index.api2
+    events:
+      - httpApi:
+          path: /api2
+          method: get
