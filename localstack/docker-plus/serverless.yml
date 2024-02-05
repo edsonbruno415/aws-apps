@@ -4,6 +4,17 @@ frameworkVersion: '3'
 provider:
   name: aws
   runtime: nodejs16.x
+  iam:
+    role:
+      statements:
+        # Allow functions to list all buckets
+        - Effect: Allow
+          Action: 's3:ListAllMyBuckets'
+          Resource: '*'
+        # Allow functions to create buckets
+        - Effect: Allow
+          Action: 's3:CreateBucket'
+          Resource: '*'
 plugins:
   - serverless-offline
 
