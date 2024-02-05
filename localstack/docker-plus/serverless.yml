@@ -14,4 +14,10 @@ functions:
       - httpApi:
           path: /
           method: get
+  create:
+    handler: ./src/index.create
+    events:
+      - httpApi:
+          path: /
+          method: post
     
