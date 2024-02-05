@@ -10,3 +10,19 @@ services:
       - DOCKER_HOST=unix:///var/run/docker.sock
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
+  app:
+    build: .
+    volumes:
+      - .:/src
+      - nodemodules:/src/node_modules
+    restart: on-failure
+    ports:
+      - 3000:3000
+    depends_on:
+      - localstack
+    environment:
+      LOCALSTACK_HOST: localstack
+    
+
+volumes:
+  nodemodules: {}

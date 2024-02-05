@@ -8,14 +8,14 @@ const s3Config = {
 
 const isLocal = process.env.IS_OFFLINE;
 
-if(isLocal){
+if (isLocal) {
   AWS.config.update({
     credentials: {
       accessKeyId: 'test',
       secretAccessKey: 'test',
     },
   });
-  const host = "localhost";
+  const host = process.env.LOCALSTACK_HOST || "localhost";
   s3Config.endpoint = new AWS.Endpoint(`http://${host}:4566`)
 }
 
