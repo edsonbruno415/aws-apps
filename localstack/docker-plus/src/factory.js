@@ -1,30 +1,9 @@
 'use strict';
 
-const AWS = require('aws-sdk');
-
-const s3Config = {
-  s3ForcePathStyle: true,
-};
-
-const isLocal = process.env.IS_OFFLINE;
-
-if (isLocal) {
-
-/*  
-    credenciais setadas no dockerfile
-    AWS.config.update({
-    credentials: {
-      accessKeyId: 'test',
-      secretAccessKey: 'test',
-    },
-  }); 
-*/
-  const host = process.env.LOCALSTACK_HOST || "localhost";
-  s3Config.endpoint = new AWS.Endpoint(`http://${host}:4566`)
-}
-
-const S3 = new AWS.S3(s3Config);
+const { S3factory } = require('./s3Service');
+const Config = require('./config');
+const config = Config();
 
 module.exports = {
-  S3,
+  S3: S3factory(config),
 };
