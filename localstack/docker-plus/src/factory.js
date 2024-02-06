@@ -9,12 +9,16 @@ const s3Config = {
 const isLocal = process.env.IS_OFFLINE;
 
 if (isLocal) {
-  AWS.config.update({
+
+/*  
+    credenciais setadas no dockerfile
+    AWS.config.update({
     credentials: {
       accessKeyId: 'test',
       secretAccessKey: 'test',
     },
-  });
+  }); 
+*/
   const host = process.env.LOCALSTACK_HOST || "localhost";
   s3Config.endpoint = new AWS.Endpoint(`http://${host}:4566`)
 }
